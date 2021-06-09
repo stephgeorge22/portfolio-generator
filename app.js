@@ -39,15 +39,20 @@ return inquirer.prompt([
         }
     },
     {
+        type: 'confirm',
+        name: 'confirmAbout',
+        message: 'Would you like to enter some information about yourself for an "About" section?',
+        default: true
+    },
+    {
         type: 'input',
         name: 'about',
-        message: 'Provide some information about yourself: (Required)',
-        validate: aboutInput => {
-            if (aboutInput) {
-            return true;
+        message: 'Provide some information about yourself:',
+        when: ({ confirmAbout }) => {
+            if (confirmAbout) {
+              return true;
             } else {
-            console.log('Please provide some information about yourself!');
-            return false;
+              return false;
             }
         }
     }
@@ -70,15 +75,7 @@ const promptProject = portfolioData => {
         {
             type: 'input',
             name: 'name',
-            message: 'What is your name? (Required)',
-            validate: nameInput => {
-                if (nameInput) {
-                return true;
-                } else {
-                console.log('Please enter your name!');
-                return false;
-                }
-            }
+            message: 'What is your name?',
         },
         {
             type: 'input',
